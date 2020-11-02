@@ -14,17 +14,16 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Controller
-public class FirstController {
+@RestController
+public class GreetingsController {
 
     @GetMapping("/hello")
     public String helloPage(){
 
-       return "first/hello";
+       return "Hello, World!";
     }
 
     @PostMapping("/simpledata")
-    @ResponseBody
     public IpLangBodyDTO hell(HttpServletRequest request) {
         IpLangBodyDTO ipLangBody= new IpLangBodyDTO();
 
