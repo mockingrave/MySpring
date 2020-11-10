@@ -1,4 +1,4 @@
-package myspring.DTO;
+package myspring.mvc.DTO;
 
 public class DateTimeDTO {
     private String dateTime;

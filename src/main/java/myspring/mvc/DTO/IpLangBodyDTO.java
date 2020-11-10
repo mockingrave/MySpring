@@ -1,4 +1,4 @@
-package myspring.DTO;
+package myspring.mvc.DTO;
 
 public class IpLangBodyDTO {
     private String ip;

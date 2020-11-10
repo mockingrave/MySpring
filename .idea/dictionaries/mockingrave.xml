@@ -2,7 +2,9 @@
   <dictionary name="mockingrave">
     <words>
       <w>myspring</w>
+      <w>postgresql</w>
       <w>simpledata</w>
+      <w>throwables</w>
     </words>
   </dictionary>
 </component>
