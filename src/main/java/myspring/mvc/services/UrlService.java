@@ -1,7 +1,7 @@
 package myspring.mvc.services;
 
-import myspring.database.entities.Url;
-import myspring.database.repositories.UrlRepository;
+import myspring.database.JDBC.entities.Url;
+import myspring.database.JDBC.repositories.UrlRepository;
 import myspring.mvc.DTO.UrlDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +18,10 @@ public class UrlService {
     }
 
     public long convertToShortUrl(UrlDTO request) {
-        Url url = new Url();
-        url.setLongUrl(request.getLongUrl());
+        Url url = new Url(0L, request.getLongUrl());
         try {
             return urlRepository.getUrlByLongUrl(url.getLongUrl()).getId();
-        }catch (Exception e){
+        } catch (Exception e) {
             urlRepository.insert(url);
         }
         return urlRepository.getUrlByLongUrl(url.getLongUrl()).getId();
@@ -34,8 +33,8 @@ public class UrlService {
         try {
             Url url = urlRepository.getUrlById(id);
             return url.getLongUrl();
-        }catch (EntityNotFoundException e){
-             return "There is no entity with " + shortUrl;
+        } catch (EntityNotFoundException e) {
+            return "There is no entity with " + shortUrl;
         }
     }
 }

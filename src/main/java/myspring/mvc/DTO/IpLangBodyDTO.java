@@ -5,27 +5,25 @@ public class IpLangBodyDTO {
     private String language;
     private String body;
 
-    public String getIp() {
-        return ip;
+    protected IpLangBodyDTO() {
     }
 
-    public void setIp(String ip) {
+    public IpLangBodyDTO(String ip, String language, String body) {
         this.ip = ip;
+        this.language = language;
+        this.body = body;
+    }
+
+    public String getIp() {
+        return ip;
     }
 
     public String getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
     public String getBody() {
         return body;
     }
 
-    public void setBody(String body) {
-        this.body = body;
-    }
 }

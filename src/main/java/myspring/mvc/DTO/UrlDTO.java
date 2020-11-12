@@ -11,20 +11,21 @@ public class UrlDTO {
 
     private String longUrl;
 
-    public String getLongUrl() {
-        return longUrl;
+    protected UrlDTO() {
     }
 
-    public void setLongUrl(String longUrl) {
+    public UrlDTO(long id, String longUrl) {
+        this.id = id;
         this.longUrl = longUrl;
+    }
+
+    public String getLongUrl() {
+        return longUrl;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
 }

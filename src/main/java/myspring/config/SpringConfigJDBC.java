@@ -4,18 +4,15 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jdbc.core.convert.JdbcCustomConversions;
-import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 @Configuration
-@ComponentScan("myspring.database")
-@EnableJdbcRepositories("myspring.repositories")//МЕНЯЛА
-public class SpringConfigDB {
+@ComponentScan("myspring.database.JDBC")
+@EnableJdbcRepositories("myspring.repositories")
+public class SpringConfigJDBC {
 
     @Bean
     public DataSource dataSource() {

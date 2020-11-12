@@ -1,6 +1,6 @@
-package myspring.database.repositories;
+package myspring.database.JDBC.repositories;
 
-import myspring.database.entities.Url;
+import myspring.database.JDBC.entities.Url;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;

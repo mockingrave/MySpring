@@ -1,8 +1,8 @@
-package myspring.database.templates;
+package myspring.database.JDBC.templates;
 
-import myspring.database.entities.Url;
-import myspring.database.mappers.UrlMapper;
-import myspring.database.repositories.UrlRepository;
+import myspring.database.JDBC.entities.Url;
+import myspring.database.JDBC.mappers.UrlMapper;
+import myspring.database.JDBC.repositories.UrlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;

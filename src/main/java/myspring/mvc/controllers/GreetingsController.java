@@ -26,13 +26,11 @@ public class GreetingsController {
 
     @PostMapping("/simpledata")
     public IpLangBodyDTO dataCheck(HttpServletRequest request) {
-        IpLangBodyDTO ipLangBody = new IpLangBodyDTO();
 
         String ipAddress = request.getRemoteAddr();
 
         Locale currentLocale = request.getLocale();
         String language = currentLocale.getLanguage();
-
 
         String body = "";
         try {
@@ -43,11 +41,7 @@ public class GreetingsController {
             System.out.println("look at body!");
         }
 
-        ipLangBody.setIp(ipAddress);
-        ipLangBody.setLanguage(language);
-        ipLangBody.setBody(body);
-
-        return ipLangBody;
+        return new IpLangBodyDTO(ipAddress, language, body);
     }
 
     @GetMapping("/datetime")
@@ -57,11 +51,7 @@ public class GreetingsController {
         long difference = Math.abs(currentServerDate - inputDateTime);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss (z) dd.MM.yyyy");
-        DateTimeDTO dateTimeDTO = new DateTimeDTO();
 
-        dateTimeDTO.setDateTime(dateFormat.format(currentServerDate));
-
-        dateTimeDTO.setDifference("");
         String differenceStr =
                 String.format("%02d", (difference / 1000 / 60 / 60) % 24) + ":" +
                         String.format("%02d", (difference / 1000 / 60) % 60) + ":" +
@@ -70,8 +60,8 @@ public class GreetingsController {
                         String.format("%02d", (difference / 1000 / 60 / 60 / 24) % 30) + "." +
                         String.format("%02d", (difference / 1000 / 60 / 60 / 24 / 30) % 12) + "." +
                         String.format("%04d", (difference / 1000 / 60 / 60 / 24 / 30 / 12));
-        dateTimeDTO.setDifference(differenceStr);
-        return dateTimeDTO;
+
+        return new DateTimeDTO(dateFormat.format(currentServerDate), differenceStr);
     }
 
 }
