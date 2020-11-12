@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 @Configuration
 @ComponentScan("myspring.database.JDBC")
-@EnableJdbcRepositories("myspring.repositories")
+@EnableJdbcRepositories("myspring.database.JDBC.repositories")
 public class SpringConfigJDBC {
 
     @Bean
