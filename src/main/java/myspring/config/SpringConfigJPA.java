@@ -3,6 +3,7 @@ package myspring.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -15,10 +16,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import java.util.Properties;
 
 @Configuration
+@PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 @ComponentScan("myspring.database.JPA")
 @EnableJpaRepositories("myspring.database.JPA.repositories")
 public class SpringConfigJPA extends SpringConfigJDBC {
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em

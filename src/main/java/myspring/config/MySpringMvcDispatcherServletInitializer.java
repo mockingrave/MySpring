@@ -5,7 +5,11 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{SpringConfigJDBC.class, SpringConfigJPA.class};
+        return new Class[]{
+                SpringConfigJDBC.class,
+                SpringConfigJPA.class,
+                SecurityConfig.class
+        };
     }
 
     @Override

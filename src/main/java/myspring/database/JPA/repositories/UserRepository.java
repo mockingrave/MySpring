@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
 
+    User findUserByLogin(String login);
+
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query("update User u set u.password = :newPassword where u.login = :login")
