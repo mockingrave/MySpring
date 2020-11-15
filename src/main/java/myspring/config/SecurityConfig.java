@@ -33,14 +33,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .httpBasic().disable()
                 .csrf().disable()
-
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/user/{username}").authenticated()
-                .antMatchers("/user/auth", "/hello").permitAll()
-                .and()
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+                .antMatchers(
+                        "/hello",
+                        "/url/**",
+                        "/user/auth",
+                        "/user/new",
+                        "/datetime",
+                        "/simpledata").permitAll()
+                .antMatchers("/user/{username}/**").access("#username==authentication.name")
+
+                .anyRequest().authenticated();
     }
 
     @Bean

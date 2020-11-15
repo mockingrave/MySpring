@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 
 @RestController
+@RequestMapping("/url")
 public class UrlController {
 
     private final UrlService urlService;
@@ -19,7 +20,7 @@ public class UrlController {
         this.urlService = urlService;
     }
 
-    @PostMapping("/db")
+    @PostMapping("/new")
     public UrlDTO convertToShortUrl(@RequestBody UrlDTO request) {
         return new UrlDTO(urlService.convertToShortUrl(request), null);
     }

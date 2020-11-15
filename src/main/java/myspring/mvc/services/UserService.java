@@ -21,21 +21,23 @@ public class UserService {
     }
 
 
-    public void addUser(UserDTO userDTO) {
-        userRepository.save(
-                new User(
-                        userDTO.getLogin(),
-                        passwordEncoder.encode(userDTO.getPassword())
-                )
-        );
+    public boolean addUser(UserDTO userDTO) {
+        User user = new User(userDTO.getLogin(), passwordEncoder.encode(userDTO.getPassword()));
+        if(userRepository.findUserByLogin(userDTO.getLogin())==null){
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 
-    public void updateUserPassword(String login, String newPassword) {
-        userRepository.updatePassword(login, newPassword);
+    public boolean updateUserPassword(String login, String newPassword) {
+        userRepository.updatePassword(login, passwordEncoder.encode(newPassword));
+        return true;
     }
 
-    public void deleteUser(UserDTO userDTO) {
-        userRepository.delete(new User(userDTO.getLogin(), userDTO.getPassword()));
+    public boolean deleteUser(String login) {
+        userRepository.deleteById(login);
+        return true;
     }
 
     public UserDTO checkPassword(UserDTO userDTO){
