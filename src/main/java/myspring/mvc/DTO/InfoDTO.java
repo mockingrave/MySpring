@@ -19,6 +19,9 @@ public class InfoDTO {
     public String getInformation() {
         return information;
     }
-    public String getAdditional_information(){return additional_information;}
+
+    public String getAdditional_information() {
+        return additional_information;
+    }
 
 }

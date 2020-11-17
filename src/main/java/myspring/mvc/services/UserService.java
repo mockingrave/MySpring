@@ -4,12 +4,10 @@ import myspring.database.JPA.entities.User;
 import myspring.database.JPA.repositories.UserRepository;
 import myspring.mvc.DTO.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@ComponentScan("myspring.config")
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -23,11 +21,15 @@ public class UserService {
 
     public boolean addUser(UserDTO userDTO) {
         User user = new User(userDTO.getLogin(), passwordEncoder.encode(userDTO.getPassword()));
-        if(userRepository.findUserByLogin(userDTO.getLogin())==null){
+        if (userRepository.getUserByLogin(userDTO.getLogin()) == null) {
             userRepository.save(user);
             return true;
         }
         return false;
+    }
+
+    public UserDTO getUserByLogin(String login) {
+        return new UserDTO(userRepository.getUserByLogin(login).getLogin(), null);
     }
 
     public boolean updateUserPassword(String login, String newPassword) {
@@ -40,12 +42,12 @@ public class UserService {
         return true;
     }
 
-    public UserDTO checkPassword(UserDTO userDTO){
-        User user = userRepository.findUserByLogin(userDTO.getLogin());
-        if(user!=null){
+    public UserDTO checkPassword(UserDTO userDTO) {
+        User user = userRepository.getUserByLogin(userDTO.getLogin());
+        if (user != null) {
             if (passwordEncoder.matches
                     (userDTO.getPassword(),
-                    user.getPassword())
+                            user.getPassword())
             )
                 return userDTO;
         }

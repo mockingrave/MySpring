@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtFilter jwtFilter;
 
     @Autowired
-    public SecurityConfig(JwtFilter jwtFilter){
+    public SecurityConfig(JwtFilter jwtFilter) {
         this.jwtFilter = jwtFilter;
     }
 
@@ -40,11 +40,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/hello",
                         "/url/**",
+
                         "/user/auth",
                         "/user/new",
+
+                        "/note/new",
+
                         "/datetime",
                         "/simpledata").permitAll()
                 .antMatchers("/user/{username}/**").access("#username==authentication.name")
+                .antMatchers("/note/{username}/**").access("#username==authentication.name")
 
                 .anyRequest().authenticated();
     }

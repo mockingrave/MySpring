@@ -21,14 +21,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/{login}")
-    public String checkAccess(@PathVariable String login) {
-        return login;
+    @GetMapping("/{username}")
+    public UserDTO checkAccess(@PathVariable String username) {
+        return new UserDTO(userService.getUserByLogin(username).getLogin(), null);
     }
 
     @PostMapping("/new")
     public InfoDTO addUser(@RequestBody UserDTO request) {
-        if(userService.addUser(request))
+        if (userService.addUser(request))
             return new InfoDTO("success", "user was created");
         return new InfoDTO();
     }
@@ -36,23 +36,23 @@ public class UserController {
     @PostMapping("/auth")
     public TokenDTO auth(@RequestBody UserDTO request) {
         UserDTO userDTO = userService.checkPassword(request);
-        if(userDTO!=null) {
+        if (userDTO != null) {
             return new TokenDTO(jwtProvider.generateToken(userDTO.getLogin()));
-        }else {
+        } else {
             return new TokenDTO("failure");
         }
     }
 
-    @PatchMapping("/{login}")
-    public InfoDTO editPassword(@PathVariable String login, @RequestBody UserDTO request) {
-        if(userService.updateUserPassword(login, request.getPassword()))
+    @PatchMapping("/{username}")
+    public InfoDTO editPassword(@PathVariable String username, @RequestBody UserDTO request) {
+        if (userService.updateUserPassword(username, request.getPassword()))
             return new InfoDTO("success", "password was updated");
         return new InfoDTO();
     }
 
-    @DeleteMapping("/{login}")
-    public InfoDTO deleteUser(@PathVariable String login) {
-        if(userService.deleteUser(login))
+    @DeleteMapping("/{username}")
+    public InfoDTO deleteUser(@PathVariable String username) {
+        if (userService.deleteUser(username))
             return new InfoDTO("success", "user was deleted");
         return new InfoDTO();
     }

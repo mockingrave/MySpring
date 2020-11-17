@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
 
-    User findUserByLogin(String login);
+    User getUserByLogin(String login);
 
     @Transactional
     @Modifying(clearAutomatically = true)

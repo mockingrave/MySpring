@@ -9,6 +9,6 @@ import java.sql.SQLException;
 public class UrlMapper implements RowMapper<Url> {
     public Url mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Url(rs.getInt("id"),
-                       rs.getString("long_url"));
+                rs.getString("long_url"));
     }
 }

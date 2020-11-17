@@ -10,8 +10,7 @@ import java.util.Date;
 @Component
 public class JwtProvider {
 
-//    @Value("${jwt.secret}")
-    private String jwtSecret = "mockingrave";
+    private final String jwtSecret = "mockingrave";
 
     public String generateToken(String login) {
         Date date = Date.from(LocalDate.now().plusDays(14).atStartOfDay(ZoneId.systemDefault()).toInstant());
