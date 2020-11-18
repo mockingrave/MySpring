@@ -47,20 +47,20 @@ public class GreetingsController {
     public DateTimeDTO timeCheck(@RequestParam(required = false) long inputDateTime) {
 
         long currentServerDate = System.currentTimeMillis();
-        long difference = Math.abs(currentServerDate - inputDateTime);
+        long differenceInMS = Math.abs(currentServerDate - inputDateTime);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss (z) dd.MM.yyyy");
 
-        String differenceStr =
-                String.format("%02d", (difference / 1000 / 60 / 60) % 24) + ":" +
-                        String.format("%02d", (difference / 1000 / 60) % 60) + ":" +
-                        String.format("%02d", (difference / 1000) % 60) + ":" +
-                        String.format("%03d", (difference % 1000)) + "  " +
-                        String.format("%02d", (difference / 1000 / 60 / 60 / 24) % 30) + "." +
-                        String.format("%02d", (difference / 1000 / 60 / 60 / 24 / 30) % 12) + "." +
-                        String.format("%04d", (difference / 1000 / 60 / 60 / 24 / 30 / 12));
+        String differenceInNormalForm =
+                String.format("%02d", (differenceInMS / 1000 / 60 / 60) % 24) + ":" +
+                        String.format("%02d", (differenceInMS / 1000 / 60) % 60) + ":" +
+                        String.format("%02d", (differenceInMS / 1000) % 60) + ":" +
+                        String.format("%03d", (differenceInMS % 1000)) + "  " +
+                        String.format("%02d", (differenceInMS / 1000 / 60 / 60 / 24) % 30) + "." +
+                        String.format("%02d", (differenceInMS / 1000 / 60 / 60 / 24 / 30) % 12) + "." +
+                        String.format("%04d", (differenceInMS / 1000 / 60 / 60 / 24 / 30 / 12));
 
-        return new DateTimeDTO(dateFormat.format(currentServerDate), differenceStr);
+        return new DateTimeDTO(dateFormat.format(currentServerDate), differenceInNormalForm, differenceInMS);
     }
 
 }

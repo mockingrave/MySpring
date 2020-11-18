@@ -23,6 +23,7 @@ public class UserController {
 
     @GetMapping("/{username}")
     public UserDTO checkAccess(@PathVariable String username) {
+
         return new UserDTO(userService.getUserByLogin(username).getLogin(), null);
     }
 

@@ -6,10 +6,11 @@ import myspring.mvc.services.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/note/{username}")
+@RequestMapping("/note")
 public class NoteController {
 
     private final NoteService noteService;
@@ -21,34 +22,34 @@ public class NoteController {
     }
 
     @GetMapping("/{noteHeader}")
-    public NoteDTO oneNote(@PathVariable String noteHeader, @PathVariable String username) {
-        return noteService.getNote(noteHeader, username);
+    public NoteDTO oneNote(@PathVariable String noteHeader, Principal principal) {
+        return noteService.getNote(noteHeader, principal.getName());
     }
 
     @GetMapping("/getAll")
-    public List<NoteDTO> allNotes(@PathVariable String username) {
-        return noteService.getNotes(username);
+    public List<NoteDTO> allNotes(Principal principal) {
+        return noteService.getNotes(principal.getName());
     }
 
     @PostMapping("/new")
-    public InfoDTO addNote(@PathVariable String username, @RequestBody NoteDTO request) {
-        NoteDTO noteDTO = new NoteDTO(request.getHeader(), username, request.getBody());
+    public InfoDTO addNote(  @RequestBody NoteDTO request, Principal principal) {
+        NoteDTO noteDTO = new NoteDTO(request.getHeader(), principal.getName(), request.getBody());
         if (noteService.addNote(noteDTO))
             return new InfoDTO("success", "note was created");
         return new InfoDTO();
     }
 
     @PatchMapping("/{noteHeader}")
-    public InfoDTO editHeader(@PathVariable String noteHeader, @PathVariable String username, @RequestBody NoteDTO request) {
+    public InfoDTO editHeader(@PathVariable String noteHeader, @RequestBody NoteDTO request,  Principal principal) {
 
         boolean updStatus = false;
 
         if (request.getBody() != null) {
-            noteService.updateBody(noteHeader, username, request.getBody());
+            noteService.updateBody(noteHeader, principal.getName(), request.getBody());
             updStatus = true;
         }
         if (request.getHeader() != null) {
-            noteService.updateHeader(noteHeader, username, request.getHeader());
+            noteService.updateHeader(noteHeader, principal.getName(), request.getHeader());
             updStatus = true;
         }
 
@@ -58,8 +59,8 @@ public class NoteController {
     }
 
     @DeleteMapping("/{noteHeader}")
-    public InfoDTO deleteNote(@PathVariable String noteHeader, @PathVariable String username) {
-        if (noteService.deleteNote(noteHeader, username))
+    public InfoDTO deleteNote(@PathVariable String noteHeader,  Principal principal) {
+        if (noteService.deleteNote(noteHeader, principal.getName()))
             return new InfoDTO("success", "note was deleted");
         return new InfoDTO();
     }

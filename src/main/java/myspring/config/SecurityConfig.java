@@ -51,7 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/datetime",
                         "/simpledata").permitAll()
                 .antMatchers("/user/{username}/**").access("#username==authentication.name")
-                .antMatchers("/note/{username}/**").access("#username==authentication.name")
 
                 .anyRequest().authenticated();
     }

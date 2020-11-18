@@ -2,21 +2,27 @@ package myspring.mvc.DTO;
 
 public class DateTimeDTO {
     private String dateTime;
-    private String difference;
+    private String differenceInNormalForm;
+    private long differenceInMilliseconds;
 
     protected DateTimeDTO() {
     }
 
-    public DateTimeDTO(String dateTime, String difference) {
+    public DateTimeDTO(String dateTime, String differenceInNormalForm, long differenceInMilliseconds) {
         this.dateTime = dateTime;
-        this.difference = difference;
+        this.differenceInNormalForm = differenceInNormalForm;
+        this.differenceInMilliseconds = differenceInMilliseconds;
     }
 
     public String getDateTime() {
         return dateTime;
     }
 
-    public String getDifference() {
-        return difference;
+    public String getDifferenceInNormalForm() {
+        return differenceInNormalForm;
+    }
+
+    public long getDifferenceInMilliseconds() {
+        return differenceInMilliseconds;
     }
 }

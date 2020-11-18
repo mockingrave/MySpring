@@ -30,7 +30,7 @@ public class FileController {
     @Bean
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setMaxUploadSize(5 * 1024 * 1024);
+        resolver.setMaxUploadSize(10 * 1024 * 1024);
         return resolver;
     }
 
