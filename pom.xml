@@ -18,7 +18,7 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
 
-    <spring.version>5.3.0</spring.version>
+    <spring.version>5.3.1</spring.version>
       <security.version>5.4.1</security.version>
 
   </properties>
@@ -62,7 +62,16 @@
       <version>${spring.version}</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5 -->
+<!--      &lt;!&ndash; https://mvnrepository.com/artifact/org.springframework/spring-test &ndash;&gt;-->
+<!--      <dependency>-->
+<!--          <groupId>org.springframework</groupId>-->
+<!--          <artifactId>spring-test</artifactId>-->
+<!--          <version>${spring.version}</version>-->
+<!--          <scope>test</scope>-->
+<!--      </dependency>-->
+
+
+      <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5 -->
     <dependency>
       <groupId>org.thymeleaf</groupId>
       <artifactId>thymeleaf-spring5</artifactId>
@@ -76,7 +85,16 @@
       <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
-<!--JSON============================================================================================================-->
+
+      <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+      <dependency>
+          <groupId>commons-fileupload</groupId>
+          <artifactId>commons-fileupload</artifactId>
+          <version>1.4</version>
+      </dependency>
+
+
+      <!--JSON============================================================================================================-->
     <!-- https://mvnrepository.com/artifact/org.json/json -->
     <dependency>
       <groupId>org.json</groupId>
@@ -173,6 +191,12 @@
           <groupId>org.springframework.security</groupId>
           <artifactId>spring-security-jwt</artifactId>
           <version>1.1.1.RELEASE</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-test</artifactId>
+          <version>4.1.8.RELEASE</version>
+          <scope>compile</scope>
       </dependency>
 
 

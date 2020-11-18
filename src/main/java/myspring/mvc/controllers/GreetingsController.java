@@ -32,13 +32,12 @@ public class GreetingsController {
         Locale currentLocale = request.getLocale();
         String language = currentLocale.getLanguage();
 
-        String body = "";
+        String body;
         try {
             BufferedReader reader = request.getReader();
             body = reader.lines().collect(Collectors.joining());
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("look at body!");
+            return new IpLangBodyDTO(ipAddress, "failure", "invalid body");
         }
 
         return new IpLangBodyDTO(ipAddress, language, body);

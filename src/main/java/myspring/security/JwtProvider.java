@@ -1,6 +1,9 @@
 package myspring.security;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -10,7 +13,8 @@ import java.util.Date;
 @Component
 public class JwtProvider {
 
-    private final String jwtSecret = "mockingrave";
+    @Value("${jwt.secret}")
+    private String jwtSecret;
 
     public String generateToken(String login) {
         Date date = Date.from(LocalDate.now().plusDays(14).atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -25,18 +29,9 @@ public class JwtProvider {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
             return true;
-        } catch (ExpiredJwtException expEx) {
-            System.out.println("Token expired");
-        } catch (UnsupportedJwtException unsEx) {
-            System.out.println("Unsupported jwt");
-        } catch (MalformedJwtException mjEx) {
-            System.out.println("Malformed jwt");
-        } catch (SignatureException sEx) {
-            System.out.println("Invalid signature");
         } catch (Exception e) {
-            System.out.println("invalid token");
+            return false;
         }
-        return false;
     }
 
     public String getLoginFromToken(String token) {

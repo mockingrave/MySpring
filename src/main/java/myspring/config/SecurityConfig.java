@@ -38,14 +38,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/hello",
-                        "/url/**",
+                        "/note/new",
 
                         "/user/auth",
                         "/user/new",
 
-                        "/note/new",
+                        "/url/**",
 
+                        "/file/**",
+
+                        "/hello",
                         "/datetime",
                         "/simpledata").permitAll()
                 .antMatchers("/user/{username}/**").access("#username==authentication.name")
